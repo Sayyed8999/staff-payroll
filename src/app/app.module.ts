@@ -9,6 +9,7 @@ import { NavComponent } from './shared/components/nav/nav.component';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { EmployeesModule } from './shared/modules/employees/employees.module';
 import { AdvanceModule } from './shared/modules/advance/advance.module';
+import { AttendanceModule } from './shared/modules/attendance/attendance.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AdvanceModule } from './shared/modules/advance/advance.module';
     BrowserAnimationsModule,
     MaterialModule,
     EmployeesModule,
-    AdvanceModule
+    AdvanceModule,
+    AttendanceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

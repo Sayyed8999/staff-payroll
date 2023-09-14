@@ -1,14 +1,10 @@
 
 <mat-toolbar class="bg-s text-white d-flex justify-content-between">
- 
-
     <span routerLink="/" class="text-capitilize" >{{heading}}</span>
     <button mat-icon-button class="example-icon " aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()" >
         <mat-icon>menu</mat-icon>
       </button>
 </mat-toolbar>
-
-
   <mat-drawer-container class="example-container"  hasBackdrop="true">
       <mat-drawer mode="over" #sidenav  position="end">
 
@@ -27,7 +23,7 @@
                       Employees
                   </span>
               </a>
-              <a  mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"   >
+              <a  mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  routerLink="/attendance" >
            
                   <mat-icon>
                       person
