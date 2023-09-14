@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HeadingService } from '../../services/heading.service';
 
@@ -7,7 +7,7 @@ import { HeadingService } from '../../services/heading.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
 
   heading: string = 'Dashboard'
   constructor(
@@ -23,6 +23,9 @@ export class NavComponent implements OnInit {
       })
   }
 
+  ngOnDestroy(): void {
+    this._headingService.heading$.unsubscribe()
+  }
 
 
 }
