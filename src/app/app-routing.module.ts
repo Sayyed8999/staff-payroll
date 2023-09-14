@@ -10,7 +10,10 @@ const routes: Routes = [
   },
   {
     path: 'employees',
-    component: EmployeTableComponent
+    component: EmployeTableComponent,
+    data: {
+      heading: 'Employees'
+    }
   }
 ];
 

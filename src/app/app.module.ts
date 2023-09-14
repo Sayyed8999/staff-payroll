@@ -8,6 +8,7 @@ import { DashboardComponent } from './shared/components/dashboard/dashboard.comp
 import { NavComponent } from './shared/components/nav/nav.component';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { EmployeesModule } from './shared/modules/employees/employees.module';
+import { AdvanceModule } from './shared/modules/advance/advance.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { EmployeesModule } from './shared/modules/employees/employees.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    EmployeesModule
+    EmployeesModule,
+    AdvanceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,17 +1,19 @@
 
-<mat-toolbar class="bg-s text-white">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()" >
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
+<mat-toolbar class="bg-s text-white d-flex justify-content-between">
+ 
 
+    <span routerLink="/" class="text-capitilize" >{{heading}}</span>
+    <button mat-icon-button class="example-icon " aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()" >
+        <mat-icon>menu</mat-icon>
+      </button>
 </mat-toolbar>
 
-  <mat-drawer-container class="example-container" >
-      <mat-drawer mode="side" #sidenav >
+
+  <mat-drawer-container class="example-container"  hasBackdrop="true">
+      <mat-drawer mode="over" #sidenav  position="end">
 
           <mat-nav-list>
-              <a routerLink="/main" mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  [routerLinkActiveOptions]="{exact: true}" routerLink="/">
+              <a  mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  [routerLinkActiveOptions]="{exact: true}" routerLink="/">
                   <mat-icon>
                       house
                   </mat-icon>
@@ -19,13 +21,13 @@
                       Dashboard
                   </span>
               </a>
-              <a routerLink="/resume" mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac" routerLink="/employees">
+              <a   mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  [routerLinkActiveOptions]="{exact: true}" routerLink="/employees">
                   <mat-icon>assignment</mat-icon>
                   <span class="ml-2">
                       Employees
                   </span>
               </a>
-              <a  mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  [routerLinkActiveOptions]="{exact: true}" routerLink="/" >
+              <a  mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"   >
            
                   <mat-icon>
                       person
@@ -35,7 +37,7 @@
                       Attendance
                   </span>
               </a>
-              <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  [routerLinkActiveOptions]="{exact: true}" routerLink="/">
+              <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  >
                   <mat-icon>
                       forum
                   </mat-icon>
@@ -44,7 +46,7 @@
                       Advance
                   </span>
               </a>
-              <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  [routerLinkActiveOptions]="{exact: true}" routerLink="/">
+              <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  >
                 <mat-icon>
                     forum
                 </mat-icon>
@@ -53,7 +55,7 @@
                     Leaves
                 </span>
             </a>
-            <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  [routerLinkActiveOptions]="{exact: true}" routerLink="/">
+            <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  >
                 <mat-icon>
                     forum
                 </mat-icon>
@@ -62,6 +64,17 @@
                     Salary Record
                 </span>
             </a>
+            <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac" class="d-flex justify-content-center logout"  >
+               
+                
+                <button mat-raised-button color="warn" class="w-100">
+                    <mat-icon>
+                        logout
+                    </mat-icon>
+                    Log Out
+                </button>
+            </a>
+
           </mat-nav-list>
       </mat-drawer>
       <mat-drawer-content (click)="sidenav.close()">

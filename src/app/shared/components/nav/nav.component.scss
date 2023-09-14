@@ -13,23 +13,25 @@ a:hover {
     // background:rgba(0,0,0,.4);
 }
 
+mat-toolbar>span {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
 ::ng-deep .bg-s {
-    // background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
-    // background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
-    // background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
-    // background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
     background-color: #0e1420;
-    // background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
-    // text-decoration: underline;
 }
 
 mat-drawer {
-    width: 14%;
+    width: 12%;
     // background-color: #85f6b8;
     background-color: #111926;
-
 }
 
+.logout {
+    position: absolute;
+    bottom: 30px;
+}
 
 mat-drawer-container {
     height: calc(100vh - 65px);
