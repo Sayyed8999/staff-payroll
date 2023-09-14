@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EmployeFormComponent } from '../employe-form/employe-form.component';
 import { ActivatedRoute } from '@angular/router';
 import { HeadingService } from 'src/app/shared/services/heading.service';
@@ -22,7 +22,9 @@ export class EmployeTableComponent implements OnInit {
 
 
   openEmpForm() {
-    this._dialog.open(EmployeFormComponent)
+    let dialogConfig = new MatDialogConfig
+    // dialogConfig.width = '100%'
+    this._dialog.open(EmployeFormComponent, dialogConfig)
   }
 
 }
