@@ -8,7 +8,7 @@ import { AttendanceTableComponent } from './shared/modules/attendance/attendace-
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
   },
   {
     path: 'employees',

@@ -38,6 +38,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 
 const mat = [
   MatAutocompleteModule,
@@ -79,7 +80,9 @@ const mat = [
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DeleteConfirmationComponent
+  ],
   imports: [
     CommonModule,
     ...mat

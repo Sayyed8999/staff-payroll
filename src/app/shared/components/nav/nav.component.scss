@@ -9,14 +9,16 @@ a:hover {
 
 .ac {
     color: #fff;
-    background-color: #222836;
-    // background:rgba(0,0,0,.4);
+    // background-color: #222836;
+    background-color: #071952 !important;
 }
 
 mat-toolbar>span {
     cursor: pointer;
     margin-left: 10px;
 }
+
+
 
 ::ng-deep .bg-s {
     background-color: #0e1420;
@@ -26,12 +28,20 @@ mat-drawer {
     width: 12%;
     // background-color: #85f6b8;
     background-color: #111926;
+    // position: fixed;
 }
 
 .logout {
     position: absolute;
-    bottom: 30px;
+    bottom: 50px;
 }
+
+// .close-icon {
+//     position: fixed;
+//     right: 13%;
+//     color: #fff;
+//     cursor: pointer;
+// }
 
 mat-drawer-container {
     height: calc(100vh - 65px);
@@ -67,5 +77,10 @@ mat-nav-list>a:focus {
 
     mat-drawer {
         width: 150px;
+    }
+
+    .close-icon {
+        right: 152px;
+
     }
 }

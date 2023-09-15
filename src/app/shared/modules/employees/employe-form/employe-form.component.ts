@@ -1,21 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { CheckboxControlValueAccessor, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Iemployee } from 'src/app/shared/models/employee';
+import { EmployeeService } from 'src/app/shared/services/employee.service';
+import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-employe-form',
   templateUrl: './employe-form.component.html',
   styleUrls: ['./employe-form.component.scss']
 })
-export class EmployeFormComponent implements OnInit {
+export class EmployeFormComponent implements OnInit, OnDestroy {
 
   employeForm!: FormGroup
   constructor(
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _employeeService: EmployeeService,
+    private _matDialogRef: MatDialogRef<EmployeFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public obj: Iemployee,
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.employeForm = this._fb.group({
+    this.createEmployeeForm()
+
+    if (this.obj) {
+      // console.log(this.obj);
+      this.employeForm.patchValue(this.obj)
+    }
+  }
+
+  createEmployeeForm(): FormGroup {
+    return this.employeForm = this._fb.group({
       fname: [null, Validators.required],
       lname: [null, Validators.required],
       contact: [null, Validators.required],
@@ -30,11 +46,11 @@ export class EmployeFormComponent implements OnInit {
       salary: [null, Validators.required],
     })
   }
+
+
   flag: boolean = false
   sameAddres() {
-
     this.flag = !this.flag
-
     if (this.flag) {
       this.employeForm.controls['permentAddress'].patchValue(this.employeForm.controls['currentAddress'].value)
     } else {
@@ -43,10 +59,51 @@ export class EmployeFormComponent implements OnInit {
 
   }
 
-  onEmployeAdd() {
-    if (this.employeForm.valid) {
-      console.log(this.employeForm.value);
+  employeeHandler() {
+
+    if (!this.obj) {
+      if (this.employeForm.valid) {
+        this._employeeService.addNewEmployee(this.employeForm.value)
+          .subscribe(res => {
+            // console.log(res);
+            this._matDialogRef.close()
+            window.location.reload();
+          })
+      }
+    } else {
+      if (this.employeForm.valid) {
+        console.log(this.employeForm.value, 'obj is avi');
+        this._employeeService.updateEmployee(this.obj.id!, this.employeForm.value)
+          .subscribe(res => {
+            // console.log(res, 'res');
+            this._matDialogRef.close()
+            window.location.reload();
+          })
+      }
+
     }
 
+  }
+
+  onEmployeRemove() {
+    console.log(this.obj.id);
+    if (this.obj) {
+      this._dialog.open(DeleteConfirmationComponent).afterClosed().subscribe(res => {
+        if (res) {
+          this._employeeService.deleteEmployee(this.obj.id!)
+            .subscribe(res => {
+              console.log(res);
+              this._matDialogRef.close()
+              window.location.reload();
+
+            })
+        }
+      })
+    }
+
+
+  }
+
+  ngOnDestroy(): void {
   }
 }
