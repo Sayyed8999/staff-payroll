@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  fireBaseUrl: 'https://staff-payroll-94459-default-rtdb.asia-southeast1.firebasedatabase.app/'
 };
 
 /*
