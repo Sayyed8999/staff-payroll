@@ -24,7 +24,8 @@ import { AttendanceModule } from './shared/modules/attendance/attendance.module'
     MaterialModule,
     EmployeesModule,
     AdvanceModule,
-    AttendanceModule
+    AttendanceModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
