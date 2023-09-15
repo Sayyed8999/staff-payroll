@@ -2,9 +2,12 @@
 <mat-toolbar class="bg-s text-white d-flex justify-content-between">
  
 
-    <span routerLink="/" class="text-capitilize" >{{heading}}</span>
+    <span class="text-capitalize d-flex justify-content-center align-items-center" >
+       <mat-icon class="mr-2">star_border</mat-icon>
+        {{heading}}
+    </span>
     <button mat-icon-button class="example-icon " aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()" >
-        <mat-icon>menu</mat-icon>
+      <mat-icon>menu</mat-icon>
       </button>
 </mat-toolbar>
 
