@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Iemployee } from 'src/app/shared/models/employee';
@@ -10,7 +10,7 @@ import { DeleteConfirmationComponent } from '../../material/delete-confirmation/
   templateUrl: './employe-form.component.html',
   styleUrls: ['./employe-form.component.scss']
 })
-export class EmployeFormComponent implements OnInit {
+export class EmployeFormComponent implements OnInit, OnDestroy {
 
   employeForm!: FormGroup
   constructor(
@@ -102,5 +102,8 @@ export class EmployeFormComponent implements OnInit {
     }
 
 
+  }
+
+  ngOnDestroy(): void {
   }
 }

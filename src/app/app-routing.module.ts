@@ -6,7 +6,7 @@ import { EmployeTableComponent } from './shared/modules/employees/employe-table/
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
   },
   {
     path: 'employees',

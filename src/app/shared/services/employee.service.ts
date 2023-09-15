@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class EmployeeService {
 
   empUrl: string = `${environment.fireBaseUrl}employee`
+
   constructor(
     private _http: HttpClient
   ) { }

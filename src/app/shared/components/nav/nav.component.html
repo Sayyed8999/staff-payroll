@@ -7,10 +7,10 @@
         {{heading}}
     </span>
     <button mat-icon-button class="example-icon " aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()" >
-      <mat-icon>menu</mat-icon>
+      <mat-icon>{{sidenav.opened ? 'close' : 'menu'}}</mat-icon>
       </button>
+      <!-- <mat-icon class="close-icon" *ngIf="sidenav.opened" (click)="sidenav.close()">close</mat-icon> -->
 </mat-toolbar>
-
 
   <mat-drawer-container class="example-container"  hasBackdrop="true">
       <mat-drawer mode="over" #sidenav  position="end">

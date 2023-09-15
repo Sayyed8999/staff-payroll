@@ -24,4 +24,10 @@ th {
     .search>mat-form-field {
         width: 100% !important;
     }
+
+    td,
+    th {
+        width: 100%;
+    }
+
 }
