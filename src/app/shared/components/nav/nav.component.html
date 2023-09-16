@@ -1,8 +1,13 @@
 
 <mat-toolbar class="bg-s text-white d-flex justify-content-between">
  
+    <div class="d-flex justify-content-center align-items-center">
+        <mat-icon *ngIf="heading.includes('Dashboard')">house</mat-icon>
+        <mat-icon *ngIf="heading.includes('Employee')">assignment</mat-icon>
+        <mat-icon *ngIf="heading.includes('Leaves')">forum</mat-icon>
+    <span  class="ml-2" > {{heading}}</span>
 
-    <span routerLink="/" class="text-capitilize" >{{heading}}</span>
+    </div>
     <button mat-icon-button class="example-icon " aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()" >
       <mat-icon>{{sidenav.opened ? 'close' : 'menu'}}</mat-icon>
       </button>

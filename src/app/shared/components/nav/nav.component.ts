@@ -9,7 +9,7 @@ import { HeadingService } from '../../services/heading.service';
 })
 export class NavComponent implements OnInit, OnDestroy {
 
-  heading: string = 'Dashboard'
+  heading!: string
   constructor(
     private _headingService: HeadingService
   ) { }

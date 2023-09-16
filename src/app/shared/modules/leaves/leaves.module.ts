@@ -4,6 +4,7 @@ import { LeaveTableComponent } from './leave-table/leave-table.component';
 import { LeaveFormComponent } from './leave-form/leave-form.component';
 import { MaterialModule } from '../material/material.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { MatNativeDateModule } from '@angular/material/core';
   imports: [
     CommonModule,
     MaterialModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ReactiveFormsModule
   ]
 })
 export class LeavesModule { }

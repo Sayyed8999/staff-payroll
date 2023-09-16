@@ -7,6 +7,9 @@ import { Iemployee, UserData } from 'src/app/shared/models/employee';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { UtilityService } from 'src/app/shared/services/utility.service';
+import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-employe-table',
@@ -24,7 +27,8 @@ export class EmployeTableComponent implements OnInit {
     'pincode',
     'bankName',
     'salary',
-    'action',
+    'action1',
+    'action2'
   ];
   dataSource!: MatTableDataSource<Iemployee>;
 
@@ -35,9 +39,8 @@ export class EmployeTableComponent implements OnInit {
     private _dialog: MatDialog,
     private _headingService: HeadingService,
     private _employeeService: EmployeeService,
-  ) {
-    this.getAllEmp()
-  }
+    private _snackbarService: SnackbarService
+  ) { }
 
   ngOnInit(): void {
     this._headingService.heading$.next('Employee')
@@ -54,6 +57,8 @@ export class EmployeTableComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
+
       })
   }
 
@@ -61,12 +66,27 @@ export class EmployeTableComponent implements OnInit {
     let dialogConfig = new MatDialogConfig
     dialogConfig.autoFocus = true
     dialogConfig.disableClose = true
-    this._dialog.open(EmployeFormComponent, dialogConfig)
+    this._dialog.open(EmployeFormComponent, dialogConfig).afterClosed()
+      .subscribe(res => {
+        if (!res) {
+          this.getAllEmp()
+        }
+      })
   }
 
-
-
-
+  onEdit(obj: Iemployee) {
+    // console.log(obj);
+    let dialogConfig = new MatDialogConfig
+    dialogConfig.data = obj
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus = true
+    this._dialog.open(EmployeFormComponent, dialogConfig).afterClosed()
+      .subscribe(res => {
+        if (!res) {
+          this.getAllEmp()
+        }
+      })
+  }
 
 
   applyFilter(event: Event) {
@@ -78,13 +98,19 @@ export class EmployeTableComponent implements OnInit {
     }
   }
 
-  onEdit(obj: Iemployee) {
-    // console.log(obj);
-    let dialogConfig = new MatDialogConfig
-    dialogConfig.data = obj
-    dialogConfig.disableClose = true
-    dialogConfig.autoFocus = true
-    this._dialog.open(EmployeFormComponent, dialogConfig)
+  onEmployeRemove(obj: Iemployee) {
+    if (obj) {
+      this._dialog.open(DeleteConfirmationComponent).afterClosed().subscribe(res => {
+        if (res) {
+          this._employeeService.deleteEmployee(obj.id!)
+            .subscribe(res => {
+              console.log(res);
+              this.getAllEmp()
+              this._snackbarService.snackBarOpen(`${obj.fname} ${obj.lname} Employee is Removed...!!!`)
+            })
+        }
+      })
+    }
   }
 }
 
