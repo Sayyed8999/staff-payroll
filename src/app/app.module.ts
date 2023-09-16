@@ -10,6 +10,7 @@ import { MaterialModule } from './shared/modules/material/material.module';
 import { EmployeesModule } from './shared/modules/employees/employees.module';
 import { AdvanceModule } from './shared/modules/advance/advance.module';
 import { AttendanceModule } from './shared/modules/attendance/attendance.module';
+import { LeavesModule } from './shared/modules/leaves/leaves.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AttendanceModule } from './shared/modules/attendance/attendance.module'
     MaterialModule,
     EmployeesModule,
     AdvanceModule,
-    AttendanceModule
+    AttendanceModule,
+    LeavesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

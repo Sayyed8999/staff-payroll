@@ -4,6 +4,7 @@ import { DashboardComponent } from './shared/components/dashboard/dashboard.comp
 import { EmployeTableComponent } from './shared/modules/employees/employe-table/employe-table.component';
 import { AttendanceModule } from './shared/modules/attendance/attendance.module';
 import { AttendanceTableComponent } from './shared/modules/attendance/attendace-table/attendance-table/attendance-table.component';
+import { LeaveTableComponent } from './shared/modules/leaves/leave-table/leave-table.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,11 @@ const routes: Routes = [
   },
   {
     path: 'attendance',
-    component:AttendanceTableComponent
+    component: AttendanceTableComponent
+  },
+  {
+    path: 'leaves',
+    component: LeaveTableComponent
   }
 ];
 
