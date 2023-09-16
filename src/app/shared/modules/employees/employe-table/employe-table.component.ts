@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EmployeFormComponent } from '../employe-form/employe-form.component';
 import { HeadingService } from 'src/app/shared/services/heading.service';
@@ -10,13 +10,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-employe-table',
   templateUrl: './employe-table.component.html',
   styleUrls: ['./employe-table.component.scss']
 })
-export class EmployeTableComponent implements OnInit {
+export class EmployeTableComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     'name',
@@ -111,6 +112,10 @@ export class EmployeTableComponent implements OnInit {
         }
       })
     }
+  }
+
+  ngOnDestroy(): void {
+
   }
 }
 

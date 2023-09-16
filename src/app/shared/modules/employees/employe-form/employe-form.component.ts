@@ -19,7 +19,6 @@ export class EmployeFormComponent implements OnInit, OnDestroy {
     private _employeeService: EmployeeService,
     private _matDialogRef: MatDialogRef<EmployeFormComponent>,
     @Inject(MAT_DIALOG_DATA) public obj: Iemployee,
-    private _dialog: MatDialog,
     private _snackbarService: SnackbarService
   ) { }
 

@@ -4,7 +4,8 @@
     <div class="d-flex justify-content-center align-items-center">
         <mat-icon *ngIf="heading.includes('Dashboard')">house</mat-icon>
         <mat-icon *ngIf="heading.includes('Employee')">assignment</mat-icon>
-        <mat-icon *ngIf="heading.includes('Leaves')">forum</mat-icon>
+        <mat-icon *ngIf="heading.includes('Leaves')">event_available</mat-icon>
+        <mat-icon *ngIf="heading.includes('Attendance')">person</mat-icon>
     <span  class="ml-2" > {{heading}}</span>
 
     </div>
@@ -43,31 +44,32 @@
                       Attendance
                   </span>
               </a>
+              <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac" routerLinkActive="ac"  routerLink="/leaves" >
+                <mat-icon>
+                    event_available
+                </mat-icon>
+            
+                <span class="ml-2">
+                    Leaves
+                </span>
+             </a>
               <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  >
                   <mat-icon>
-                      forum
+                    business_center
                   </mat-icon>
                   
                   <span class="ml-2">
                       Advance
                   </span>
               </a>
-              <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac" routerLinkActive="ac"  routerLink="/leaves" >
-                <mat-icon>
-                    forum
-                </mat-icon>
-                
-                <span class="ml-2">
-                    Leaves
-                </span>
-            </a>
+          
             <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  >
                 <mat-icon>
-                    forum
+                    attach_money
                 </mat-icon>
                 
                 <span class="ml-2">
-                    Salary Record
+                Salary Record
                 </span>
             </a>
             <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac" class="d-flex justify-content-center logout"  >

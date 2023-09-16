@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { Ileave } from 'src/app/shared/models/leave';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { LeaveService } from 'src/app/shared/services/leave.service';
-import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Observable, map, startWith } from 'rxjs';
 
@@ -42,7 +41,6 @@ export class LeaveFormComponent implements OnInit {
   // autocomplete
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.employeeNameArray.filter(option => option.toLowerCase().includes(filterValue));
   }
 

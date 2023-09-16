@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LeaveFormComponent } from '../leave-form/leave-form.component';
 import { HeadingService } from 'src/app/shared/services/heading.service';
@@ -7,7 +7,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Ileave } from 'src/app/shared/models/leave';
 import { LeaveService } from 'src/app/shared/services/leave.service';
-
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
@@ -17,7 +16,7 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
   templateUrl: './leave-table.component.html',
   styleUrls: ['./leave-table.component.scss']
 })
-export class LeaveTableComponent implements OnInit {
+export class LeaveTableComponent implements OnInit, OnDestroy {
   leaveArray: Array<Ileave> = []
   displayedColumns: string[] = [
     'name',
@@ -48,7 +47,7 @@ export class LeaveTableComponent implements OnInit {
   getAllLeave() {
     return this._leaveService.getAllLeaves()
       .subscribe(res => {
-        console.log(res);
+        // console.log(res);
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -59,13 +58,13 @@ export class LeaveTableComponent implements OnInit {
     let dialogConfig = new MatDialogConfig
     dialogConfig.disableClose = true
     dialogConfig.autoFocus = false
-    this._dialog.open(LeaveFormComponent, dialogConfig).afterClosed().subscribe(res => {
-
-      // console.log(res);
-      if (!res) {
-        this.getAllLeave()
-      }
-    })
+    this._dialog.open(LeaveFormComponent, dialogConfig).afterClosed()
+      .subscribe(res => {
+        // console.log(res);
+        if (!res) {
+          this.getAllLeave()
+        }
+      })
   }
   onEditLeave(obj: Ileave) {
     let dialogConfig = new MatDialogConfig
@@ -104,5 +103,9 @@ export class LeaveTableComponent implements OnInit {
         }
 
       })
+  }
+
+  ngOnDestroy(): void {
+
   }
 }
