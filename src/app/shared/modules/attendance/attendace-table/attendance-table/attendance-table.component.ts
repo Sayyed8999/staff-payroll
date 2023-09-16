@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AttendanceFormComponent } from '../../attendance-form/attendance-form.component';
+import { HeadingService } from 'src/app/shared/services/heading.service';
 
 
 
@@ -15,9 +16,10 @@ export class AttendanceTableComponent implements OnInit {
 
  
 
-  constructor(public _dialog:MatDialog) { }
+  constructor(public _dialog:MatDialog, private _headingservice:HeadingService) { }
 
   ngOnInit(): void {
+    this._headingservice.heading$.next('Attendance')
   }
 
   openattendanceForm(){

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AttendanceTableComponent } from './attendace-table/attendance-table/attendance-table.component';
 import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
 import { MaterialModule } from '../material/material.module';
+import { AppModule } from 'src/app/app.module';
 
 
 
@@ -13,7 +14,8 @@ import { MaterialModule } from '../material/material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    
   ]
 })
 export class AttendanceModule { }

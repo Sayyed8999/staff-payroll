@@ -26,7 +26,8 @@ import { LeavesModule } from './shared/modules/leaves/leaves.module';
     EmployeesModule,
     AdvanceModule,
     AttendanceModule,
-    LeavesModule
+    LeavesModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
