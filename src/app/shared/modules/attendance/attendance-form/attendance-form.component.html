@@ -1,24 +1,25 @@
 <div class="row">
     <div class="col-12">
         <h4 class="bg-danger p-3 text-white rounded d-flex justify-content-between align-items-center">Attendance 
-             <button mat-raised-button color="primary">Close</button>
+             <button mat-raised-button color="primary" mat-dialog-close>Close</button>
         </h4>
     </div>
+  </div>
 
-   <form class="example-form">
+   <form class="example-form" [formGroup]="signupform" (ngSubmit)="attendanceformsubmit()">
      <div class="row">
         <div class="col-sm-6">
-            <mat-form-field appearance="fill" class="example-full-width">
-                <mat-label>Fill form field</mat-label>
-                <input matInput placeholder="Placeholder">
+            <mat-form-field appearance="fill" class="w-100" >
+                <mat-label>Select Employee</mat-label>
+                <input formControlName="EmployeeName"  matInput placeholder="employee Name">
                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                 <mat-hint>Hint</mat-hint>
               </mat-form-field>
         </div>
         <div class="col-sm-6">
-            <mat-form-field appearance="fill" >
+            <mat-form-field appearance="fill"  class="w-100">
                 <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker">
+                <input formControlName="date" matInput [matDatepicker]="picker" >
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -26,23 +27,29 @@
      </div>
 
      <div class="col-sm-6 mt-4">
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="fill" class="w-100">
             <mat-label>In-time</mat-label>
-            <input matInput type="time">
+            <input formControlName="inTime" matInput type="time" required>
           </mat-form-field>
  </div>
 
  <div class="col-sm-6 mt-4">
-    <mat-form-field appearance="fill" >
+    <mat-form-field appearance="fill" class="w-100">
         <mat-label>Out-time</mat-label>
-        <input matInput type="time">
+        <input formControlName="outTime" matInput type="time" required="">
       </mat-form-field>
 </div>
 
-
+<div class="col-sm-6 mt-2">
+  
+  <p><mat-checkbox isfullday="!isfullday">IsFullDay</mat-checkbox></p>
+</div>
 
      </div>
-       
+       <div class="text-left">
+        <button mat-raised-button color="primary" class="mx-2" type="submit">Save</button>
+       <button mat-raised-button color="warn" type="button" (click)="signupform.reset()">Reset</button>
+       </div>
    </form>
   
-</div>
+

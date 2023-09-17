@@ -4,6 +4,7 @@ import { AttendanceTableComponent } from './attendace-table/attendance-table/att
 import { AttendanceFormComponent } from './attendance-form/attendance-form.component';
 import { MaterialModule } from '../material/material.module';
 import { AppModule } from 'src/app/app.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,7 @@ import { AppModule } from 'src/app/app.module';
   imports: [
     CommonModule,
     MaterialModule,
-    
+    ReactiveFormsModule
   ]
 })
 export class AttendanceModule { }

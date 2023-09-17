@@ -9,7 +9,7 @@ import { NavComponent } from './shared/components/nav/nav.component';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { EmployeesModule } from './shared/modules/employees/employees.module';
 import { AdvanceModule } from './shared/modules/advance/advance.module';
-import { AttendanceModule } from './shared/modules/attendance/attendance.module';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { AttendanceModule } from './shared/modules/attendance/attendance.module'
     MaterialModule,
     EmployeesModule,
     AdvanceModule,
-    AttendanceModule,
+    
   
   ],
   providers: [],
