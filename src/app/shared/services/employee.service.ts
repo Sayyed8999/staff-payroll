@@ -44,4 +44,20 @@ export class EmployeeService {
   deleteEmployee(id: string): Observable<null> {
     return this._http.delete<null>(this.empUrl + '/' + id + '.json')
   }
+
+  getAllEmployeeNames() {
+    return this._http.get<Iemployee[]>(this.empUrl + '.json')
+      .pipe(
+        map(res => {
+          let arr = []
+          for (let key in res) {
+            // console.log(key);
+            arr.push(res[key].fname + ' ' + res[key].lname)
+          }
+          // console.log(arr);
+          return arr
+        }
+        )
+      )
+  }
 }

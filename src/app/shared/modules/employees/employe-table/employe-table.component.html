@@ -90,11 +90,21 @@
                 </ng-container>
   
                     <!-- Edit Column -->
-                <ng-container matColumnDef="action">
+                <ng-container matColumnDef="action1">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                   <td mat-cell *matCellDef="let row">
                     <button mat-mini-fab color="primary" (click)="onEdit(row)">
                       <mat-icon>edit</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                    <!-- Delete Column -->
+                <ng-container matColumnDef="action2">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+                  <td mat-cell *matCellDef="let row">
+                    <button mat-mini-fab color="warn" (click)="onEmployeRemove(row)">
+                      <mat-icon>delete</mat-icon>
                     </button>
                   </td>
                 </ng-container>

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Iemployee } from 'src/app/shared/models/employee';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
-import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-employe-form',
@@ -13,12 +13,13 @@ import { DeleteConfirmationComponent } from '../../material/delete-confirmation/
 export class EmployeFormComponent implements OnInit, OnDestroy {
 
   employeForm!: FormGroup
+
   constructor(
     private _fb: FormBuilder,
     private _employeeService: EmployeeService,
     private _matDialogRef: MatDialogRef<EmployeFormComponent>,
     @Inject(MAT_DIALOG_DATA) public obj: Iemployee,
-    private _dialog: MatDialog
+    private _snackbarService: SnackbarService
   ) { }
 
   ngOnInit(): void {
@@ -66,8 +67,8 @@ export class EmployeFormComponent implements OnInit, OnDestroy {
         this._employeeService.addNewEmployee(this.employeForm.value)
           .subscribe(res => {
             // console.log(res);
+            this._snackbarService.snackBarOpen(`${this.employeForm.get('fname')?.value} Employee is Added Successfully...!!!`)
             this._matDialogRef.close()
-            window.location.reload();
           })
       }
     } else {
@@ -76,8 +77,9 @@ export class EmployeFormComponent implements OnInit, OnDestroy {
         this._employeeService.updateEmployee(this.obj.id!, this.employeForm.value)
           .subscribe(res => {
             // console.log(res, 'res');
+            this._snackbarService.snackBarOpen(`Employee ${this.employeForm.get('fname')?.value} Information Updated...!!!`)
+
             this._matDialogRef.close()
-            window.location.reload();
           })
       }
 
@@ -85,24 +87,7 @@ export class EmployeFormComponent implements OnInit, OnDestroy {
 
   }
 
-  onEmployeRemove() {
-    console.log(this.obj.id);
-    if (this.obj) {
-      this._dialog.open(DeleteConfirmationComponent).afterClosed().subscribe(res => {
-        if (res) {
-          this._employeeService.deleteEmployee(this.obj.id!)
-            .subscribe(res => {
-              console.log(res);
-              this._matDialogRef.close()
-              window.location.reload();
 
-            })
-        }
-      })
-    }
-
-
-  }
 
   ngOnDestroy(): void {
   }

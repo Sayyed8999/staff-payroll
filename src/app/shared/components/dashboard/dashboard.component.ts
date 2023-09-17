@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._headingService.heading$.next('dashboard')
+    this._headingService.heading$.next('Dashboard')
 
   }
 

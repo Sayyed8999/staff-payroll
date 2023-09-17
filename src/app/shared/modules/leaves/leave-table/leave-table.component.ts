@@ -1,95 +1,84 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { EmployeFormComponent } from '../employe-form/employe-form.component';
+import { LeaveFormComponent } from '../leave-form/leave-form.component';
 import { HeadingService } from 'src/app/shared/services/heading.service';
-import { Iemployee, UserData } from 'src/app/shared/models/employee';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { Ileave } from 'src/app/shared/models/leave';
+import { LeaveService } from 'src/app/shared/services/leave.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { Subscription } from 'rxjs';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
 
 @Component({
-  selector: 'app-employe-table',
-  templateUrl: './employe-table.component.html',
-  styleUrls: ['./employe-table.component.scss']
+  selector: 'app-leave-table',
+  templateUrl: './leave-table.component.html',
+  styleUrls: ['./leave-table.component.scss']
 })
-export class EmployeTableComponent implements OnInit, OnDestroy {
-
+export class LeaveTableComponent implements OnInit, OnDestroy {
+  leaveArray: Array<Ileave> = []
   displayedColumns: string[] = [
     'name',
     'contact',
-    'email',
-    'city',
-    'state',
-    'pincode',
-    'bankName',
-    'salary',
+    'date',
+    "numOfDay",
+    'reason',
     'action1',
     'action2'
   ];
-  dataSource!: MatTableDataSource<Iemployee>;
+  dataSource!: MatTableDataSource<Ileave>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
   constructor(
     private _dialog: MatDialog,
     private _headingService: HeadingService,
-    private _employeeService: EmployeeService,
+    private _leaveService: LeaveService,
+    private _utilityService: UtilityService,
     private _snackbarService: SnackbarService
   ) { }
 
   ngOnInit(): void {
-    this._headingService.heading$.next('Employee')
-    this.getAllEmp()
-
-
+    this._headingService.heading$.next('Leaves')
+    this.getAllLeave()
   }
 
-
-  getAllEmp() {
-    return this._employeeService.getAllEmployee()
+  getAllLeave() {
+    return this._leaveService.getAllLeaves()
       .subscribe(res => {
         // console.log(res);
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
-
       })
   }
-
-  openEmpForm() {
+  openLeaveForm() {
     let dialogConfig = new MatDialogConfig
-    dialogConfig.autoFocus = true
     dialogConfig.disableClose = true
-    this._dialog.open(EmployeFormComponent, dialogConfig).afterClosed()
+    dialogConfig.autoFocus = false
+    this._dialog.open(LeaveFormComponent, dialogConfig).afterClosed()
       .subscribe(res => {
+        // console.log(res);
         if (!res) {
-          this.getAllEmp()
+          this.getAllLeave()
         }
       })
   }
-
-  onEdit(obj: Iemployee) {
-    // console.log(obj);
+  onEditLeave(obj: Ileave) {
     let dialogConfig = new MatDialogConfig
     dialogConfig.data = obj
     dialogConfig.disableClose = true
-    dialogConfig.autoFocus = true
-    this._dialog.open(EmployeFormComponent, dialogConfig).afterClosed()
-      .subscribe(res => {
-        if (!res) {
-          this.getAllEmp()
-        }
-      })
+    dialogConfig.autoFocus = false
+
+    this._dialog.open(LeaveFormComponent, dialogConfig).afterClosed().subscribe(res => {
+      // console.log(res);
+      if (!res) {
+        this.getAllLeave()
+      }
+    })
   }
-
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -99,25 +88,24 @@ export class EmployeTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  onEmployeRemove(obj: Iemployee) {
-    if (obj) {
-      this._dialog.open(DeleteConfirmationComponent).afterClosed().subscribe(res => {
+  onDeleteLeave(obj: Ileave) {
+    this._dialog.open(DeleteConfirmationComponent).afterClosed()
+      .subscribe(res => {
         if (res) {
-          this._employeeService.deleteEmployee(obj.id!)
+
+          this._leaveService.removeLeave(obj.id!)
             .subscribe(res => {
-              console.log(res);
-              this.getAllEmp()
-              this._snackbarService.snackBarOpen(`${obj.fname} ${obj.lname} Employee is Removed...!!!`)
+              // console.log(res);
+              this.getAllLeave()
+              this._snackbarService.snackBarOpen(`${obj.empName}'s leave Deleted...!!!`)
             })
+
         }
+
       })
-    }
   }
 
   ngOnDestroy(): void {
 
   }
 }
-
-
-

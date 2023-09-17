@@ -5,3 +5,9 @@
 .mt-4-5 {
     margin-top: 33px;
 }
+
+@media screen and (max-width: 600px) {
+    .mt-4-5 {
+        margin-top: 0;
+    }
+}
