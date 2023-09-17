@@ -45,14 +45,9 @@ export class LeaveFormComponent implements OnInit {
   }
 
   getEmpName() {
-    return this._employeeService.getAllEmployee()
+    return this._employeeService.getAllEmployeeNames()
       .subscribe(res => {
-        // console.log(res);  
-        res.forEach(e => {
-          this.employeeNameArray.push(
-            `${e.fname} ${e.lname}`
-          )
-        })
+        this.employeeNameArray = res
         // console.log(this.employeeNameArray);
 
         // autocomplete
@@ -61,6 +56,7 @@ export class LeaveFormComponent implements OnInit {
           map(value => this._filter(value || '')),
         )
       })
+
   }
 
   createLeaveForm(): FormGroup {

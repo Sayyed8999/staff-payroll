@@ -6,6 +6,7 @@
         <mat-icon *ngIf="heading.includes('Employee')">assignment</mat-icon>
         <mat-icon *ngIf="heading.includes('Leaves')">event_available</mat-icon>
         <mat-icon *ngIf="heading.includes('Attendance')">person</mat-icon>
+        <mat-icon *ngIf="heading.includes('Advance')">business_center</mat-icon>
     <span  class="ml-2" > {{heading}}</span>
 
     </div>
@@ -53,7 +54,7 @@
                     Leaves
                 </span>
              </a>
-              <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  >
+              <a mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac" routerLink="/advance" >
                   <mat-icon>
                     business_center
                   </mat-icon>

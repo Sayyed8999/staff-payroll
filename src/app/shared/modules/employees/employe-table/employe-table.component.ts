@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EmployeFormComponent } from '../employe-form/employe-form.component';
 import { HeadingService } from 'src/app/shared/services/heading.service';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { Iemployee, UserData } from 'src/app/shared/models/employee';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,6 +10,7 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
 import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Subscription } from 'rxjs';
+import { EmployeeService } from 'src/app/shared/services/employee.service';
 
 @Component({
   selector: 'app-employe-table',
