@@ -38,7 +38,13 @@ export class AttendanceTableComponent implements OnInit {
   }
 
   openattendanceForm(){
-  this._dialog.open(AttendanceFormComponent)
+
+ const dialogref= this._dialog.open(AttendanceFormComponent)
+ dialogref.afterClosed().subscribe((res)=>{
+  if(res){
+    this.getemployee()
+  }
+ })
   }
 
   getemployee(){
@@ -62,7 +68,7 @@ export class AttendanceTableComponent implements OnInit {
   }
 
   oneditattendanceform(data:Iattendance){
-
+     
   }
 
   ondeleteuser(obj:Iattendance){

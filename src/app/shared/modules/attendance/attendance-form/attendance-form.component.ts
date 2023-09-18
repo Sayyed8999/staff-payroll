@@ -3,6 +3,8 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { AttendanceService } from 'src/app/shared/services/attendance.service';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
+import{MatDialogRef} from '@angular/material/dialog'
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-attendance-form',
@@ -15,7 +17,7 @@ signupform!:FormGroup
 // isfullday:boolean=false
 employeename:Array<any>=[]
 filteredOptions!: Observable<string[]>;
-  constructor(private _employeeService:EmployeeService, private attendanceservice:AttendanceService) { }
+  constructor(private _employeeService:EmployeeService, private attendanceservice:AttendanceService,private _dialogref:MatDialogRef<AttendanceFormComponent>,private _snackbar:SnackbarService) { }
 
   ngOnInit(): void {
     this.signupform=new FormGroup({
@@ -34,6 +36,8 @@ filteredOptions!: Observable<string[]>;
       this.attendanceservice.createattendanceinfo(this.signupform.value) 
        .subscribe((res)=>{
         console.log(res);
+        this._snackbar.snackBarOpen("userdata was added sucessfully!!!")
+        this._dialogref.close(true)
         
        })
     }   
