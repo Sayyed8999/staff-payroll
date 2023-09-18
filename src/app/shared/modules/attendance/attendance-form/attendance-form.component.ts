@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { AttendanceService } from 'src/app/shared/services/attendance.service';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
-import{MatDialogRef} from '@angular/material/dialog'
+import{MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog'
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { Iattendance } from 'src/app/shared/models/attendance';
+
 
 @Component({
   selector: 'app-attendance-form',
@@ -17,9 +19,16 @@ signupform!:FormGroup
 // isfullday:boolean=false
 employeename:Array<any>=[]
 filteredOptions!: Observable<string[]>;
-  constructor(private _employeeService:EmployeeService, private attendanceservice:AttendanceService,private _dialogref:MatDialogRef<AttendanceFormComponent>,private _snackbar:SnackbarService) { }
+  constructor(private _employeeService:EmployeeService, private attendanceservice:AttendanceService,
+    private _dialogref:MatDialogRef<AttendanceFormComponent>
+    ,private _snackbar:SnackbarService, @Inject(MAT_DIALOG_DATA) public obj:Iattendance) { 
+     
+    }
 
   ngOnInit(): void {
+
+    
+
     this.signupform=new FormGroup({
       EmployeeName:new FormControl(null,[Validators.required]),
       date:new FormControl(null,[Validators.required]),
@@ -28,19 +37,35 @@ filteredOptions!: Observable<string[]>;
       isfullday:new FormControl(null)
     })
     this.getemployeeName()
+
+    if(this.obj){
+      console.log(this.obj);
+      
+      this.signupform.patchValue(this.obj)
+    }
   }
 
   attendanceformsubmit(){
     if(this.signupform.valid){
-      // console.log(this.signupform.value);  
-      this.attendanceservice.createattendanceinfo(this.signupform.value) 
-       .subscribe((res)=>{
-        console.log(res);
-        this._snackbar.snackBarOpen("userdata was added sucessfully!!!")
-        this._dialogref.close(true)
+      if(this.obj){
+        this.attendanceservice.updateattendanceInfo(this.obj.id!, this.signupform.value) 
+        .subscribe((res)=>{
+         console.log(res);
+         this._snackbar.snackBarOpen("employee was Updated sucessfully!!!")
+         this._dialogref.close(true)
+         
+        })
+      }  else{
+        this.attendanceservice.createattendanceinfo(this.signupform.value) 
+        .subscribe((res)=>{
+         console.log(res);
+         this._snackbar.snackBarOpen("userdata was added sucessfully!!!")
+         this._dialogref.close(true)
+         
+        })
+     } 
+   }
         
-       })
-    }   
   }
 
   getemployeeName(){
