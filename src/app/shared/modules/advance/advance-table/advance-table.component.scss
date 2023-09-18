@@ -8,7 +8,10 @@ table {
 
 }
 
+h4 {
+    background-color: #071952;
 
+}
 
 td,
 th {
@@ -21,4 +24,10 @@ th {
 
     color: #fff;
 
+}
+
+@media screen and (max-width: 767px) {
+    h4 {
+        font-size: 16px;
+    }
 }
