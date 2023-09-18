@@ -11,9 +11,13 @@
         <div class="col-sm-6">
             <mat-form-field appearance="fill" class="w-100" >
                 <mat-label>Select Employee</mat-label>
-                <input formControlName="EmployeeName"  matInput placeholder="employee Name">
+                <input formControlName="EmployeeName"  matInput placeholder="employee Name" [matAutocomplete]="auto">
                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                <mat-hint>Hint</mat-hint>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let name of filteredOptions | async" [value]="name">
+                     {{name}}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
         </div>
         <div class="col-sm-6">
@@ -42,7 +46,7 @@
 
 <div class="col-sm-6 mt-2">
   
-  <p><mat-checkbox isfullday="!isfullday">IsFullDay</mat-checkbox></p>
+  <p><mat-checkbox formControlName="isfullday">IsFullDay</mat-checkbox></p>
 </div>
 
      </div>
