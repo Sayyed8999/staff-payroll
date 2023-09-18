@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdvanceFormComponent } from './advance-form.component';
+import { AdvanceFormComponent } from './AdvanceFormComponent';
 
 describe('AdvanceFormComponent', () => {
   let component: AdvanceFormComponent;
@@ -8,9 +8,9 @@ describe('AdvanceFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdvanceFormComponent ]
+      declarations: [AdvanceFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AdvanceFormComponent);
     component = fixture.componentInstance;
