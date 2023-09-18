@@ -38,6 +38,10 @@ export class AttendanceService {
       )
   }
 
+  updateattendanceInfo(id:string,obj:Iattendance):Observable<Iattendance>{
+   return this._httpservice.put<Iattendance>(`${this.attendanceUrl}/${id}/.json`,obj)
+  }
+
   deleteinfo(id:string):Observable<null>{
     return this._httpservice.delete<null>(`${this.attendanceUrl}/${id}/.json`)
   }

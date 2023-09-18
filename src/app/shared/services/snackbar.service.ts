@@ -12,7 +12,7 @@ export class SnackbarService {
 
   snackBarOpen(msg: string) {
     return this._matSnack.open(msg, 'Close', {
-      horizontalPosition: 'start',
+      horizontalPosition: "center",
       verticalPosition: 'top',
       duration: 3000
     })

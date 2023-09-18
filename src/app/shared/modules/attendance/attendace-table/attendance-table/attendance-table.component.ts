@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AttendanceFormComponent } from '../../attendance-form/attendance-form.component';
 import { HeadingService } from 'src/app/shared/services/heading.service';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
@@ -38,7 +38,13 @@ export class AttendanceTableComponent implements OnInit {
   }
 
   openattendanceForm(){
-  this._dialog.open(AttendanceFormComponent)
+
+ const dialogref= this._dialog.open(AttendanceFormComponent)
+ dialogref.afterClosed().subscribe((res)=>{
+  if(res){
+    this.getemployee()
+  }
+ })
   }
 
   getemployee(){
@@ -61,8 +67,17 @@ export class AttendanceTableComponent implements OnInit {
     }
   }
 
-  oneditattendanceform(data:Iattendance){
-
+  oneditattendanceform(obj:Iattendance){
+    console.log(obj);
+    
+    let dialogconfig = new MatDialogConfig
+    dialogconfig.data = obj
+      this._dialog.open(AttendanceFormComponent, dialogconfig)
+      .afterClosed().subscribe((res)=>{
+        if(!res){
+          this.getemployee()
+        }
+      })
   }
 
   ondeleteuser(obj:Iattendance){

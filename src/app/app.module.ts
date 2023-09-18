@@ -27,7 +27,7 @@ import { LeavesModule } from './shared/modules/leaves/leaves.module';
     MaterialModule,
     EmployeesModule,
     AdvanceModule,
-    AttendanceModule,
+    // AttendanceModule,
     LeavesModule,
 
   ],
