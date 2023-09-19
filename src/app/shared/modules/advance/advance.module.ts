@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
-import { AdvanceFormComponent } from './advance-form/advance-form.component';
 import { AdvanceTableComponent } from './advance-table/advance-table.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AdvanceFormComponent } from './advance-form/advance-form.component';
 
 
 
 @NgModule({
   declarations: [
-    AdvanceFormComponent,
-    AdvanceTableComponent
+    AdvanceTableComponent,
+    AdvanceFormComponent
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class AdvanceModule { }
