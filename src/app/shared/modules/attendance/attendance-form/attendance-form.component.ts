@@ -6,6 +6,7 @@ import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Iattendance } from 'src/app/shared/models/attendance';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 
 @Component({
@@ -19,9 +20,12 @@ export class AttendanceFormComponent implements OnInit {
   // isfullday:boolean=false
   employeename: Array<any> = []
   filteredOptions!: Observable<string[]>;
+  workHours !: number
   constructor(private _employeeService: EmployeeService, private attendanceservice: AttendanceService,
     private _dialogref: MatDialogRef<AttendanceFormComponent>
-    , private _snackbar: SnackbarService, @Inject(MAT_DIALOG_DATA) public obj: Iattendance) {
+    , private _snackbar: SnackbarService, @Inject(MAT_DIALOG_DATA) public obj: Iattendance,
+    public _utilityService: UtilityService
+  ) {
 
   }
 
@@ -35,6 +39,43 @@ export class AttendanceFormComponent implements OnInit {
       inTime: new FormControl(null, [Validators.required]),
       outTime: new FormControl(null, [Validators.required]),
       isfullday: new FormControl(null)
+    })
+    this.signupform.controls['isfullday'].disable()
+
+
+    this.signupform.controls['outTime'].valueChanges.subscribe(res => {
+      if (this.signupform.controls['inTime'].valid && this.signupform.controls['outTime'].valid) {
+        this.workHours = this._utilityService.getemployeWorkTime(this.signupform.controls['inTime'].value, this.signupform.controls['outTime'].value)
+        console.log(this.workHours);
+        if (this.workHours >= 8) {
+          this.signupform.controls['isfullday'].enable()
+          this.signupform.controls['isfullday'].patchValue(true)
+
+        } else {
+          this.signupform.controls['isfullday'].disable()
+          this.signupform.controls['isfullday'].patchValue(false)
+
+
+        }
+      }
+
+    })
+    this.signupform.controls['inTime'].valueChanges.subscribe(res => {
+      if (this.signupform.controls['inTime'].valid && this.signupform.controls['outTime'].valid) {
+        this.workHours = this._utilityService.getemployeWorkTime(this.signupform.controls['inTime'].value, this.signupform.controls['outTime'].value)
+        console.log(this.workHours);
+        if (this.workHours >= 8) {
+          this.signupform.controls['isfullday'].enable()
+          this.signupform.controls['isfullday'].patchValue(true)
+
+        } else {
+          this.signupform.controls['isfullday'].disable()
+          this.signupform.controls['isfullday'].patchValue(false)
+
+
+        }
+      }
+
     })
     this.getemployeeName()
 
@@ -72,11 +113,12 @@ export class AttendanceFormComponent implements OnInit {
     this._employeeService.getAllEmployeeNames()
       .subscribe((res) => {
         this.employeename = res
+        this.filteredOptions = this.signupform.controls['EmployeeName'].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value || '')),
+        );
       })
-    this.filteredOptions = this.signupform.controls['EmployeeName'].valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
+
   }
 
   private _filter(value: string): string[] {
