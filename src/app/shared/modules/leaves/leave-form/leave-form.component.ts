@@ -61,7 +61,7 @@ export class LeaveFormComponent implements OnInit {
 
   createLeaveForm(): FormGroup {
     return this.leaveForm = this._fb.group({
-      empName: ['', Validators.required],
+      empName: [null, Validators.required],
       contact: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
@@ -70,8 +70,8 @@ export class LeaveFormComponent implements OnInit {
   }
 
   onLeaveFormSubmit() {
-    if (!this.leaveObj) {
-      if (this.leaveForm.valid) {
+    if (this.leaveForm.valid) {
+      if (!this.leaveObj) {
         // console.log(this.leaveForm.value);
         this._leaveService.createLeave(this.leaveForm.value)
           .subscribe(res => {
@@ -79,15 +79,15 @@ export class LeaveFormComponent implements OnInit {
             this._dialogRef.close()
             this._snackBarService.snackBarOpen(`${this.leaveForm.get('empName')?.value}'s  leave Added Successfully...!!!`)
           })
-      }
-    } else {
-      this._leaveService.updateLeave(this.leaveForm.value, this.leaveObj.id!)
-        .subscribe(res => {
-          // console.log(res);
-          this._dialogRef.close()
-          this._snackBarService.snackBarOpen(`${this.leaveForm.get('empName')?.value}'s leave Update Successfully...!!!`)
+      } else {
+        this._leaveService.updateLeave(this.leaveForm.value, this.leaveObj.id!)
+          .subscribe(res => {
+            // console.log(res);
+            this._dialogRef.close()
+            this._snackBarService.snackBarOpen(`${this.leaveForm.get('empName')?.value}'s leave Update Successfully...!!!`)
 
-        })
+          })
+      }
     }
 
   }

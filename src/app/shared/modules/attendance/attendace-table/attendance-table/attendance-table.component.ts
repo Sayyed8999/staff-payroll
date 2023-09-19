@@ -1,15 +1,16 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AttendanceFormComponent } from '../../attendance-form/attendance-form.component';
 import { HeadingService } from 'src/app/shared/services/heading.service';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { AttendanceService } from 'src/app/shared/services/attendance.service';
 import { Iattendance } from 'src/app/shared/models/attendance';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DeleteConfirmationComponent } from '../../../material/delete-confirmation/delete-confirmation.component';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 
 
@@ -21,40 +22,41 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 })
 export class AttendanceTableComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'EmployeeName', 'date', 'inTime','outTime','isfullday','edit','delete'];
+  displayedColumns: string[] = ['EmployeeName', 'date', 'inTime', 'outTime', 'hours', 'isfullday', 'edit', 'delete'];
   dataSource!: MatTableDataSource<Iattendance>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-//  Arrayattendance:Iattendance[]=[] 
+  //  Arrayattendance:Iattendance[]=[] 
 
-  constructor(public _dialog:MatDialog, private _headingservice:HeadingService,
-    private _attendanceservice:AttendanceService,private _snackbarService:SnackbarService) { }
+  constructor(public _dialog: MatDialog, private _headingservice: HeadingService,
+    private _attendanceservice: AttendanceService, private _snackbarService: SnackbarService,
+  ) { }
 
   ngOnInit(): void {
     this.getemployee()
 
   }
 
-  openattendanceForm(){
+  openattendanceForm() {
 
- const dialogref= this._dialog.open(AttendanceFormComponent)
- dialogref.afterClosed().subscribe((res)=>{
-  if(res){
-    this.getemployee()
+    const dialogref = this._dialog.open(AttendanceFormComponent)
+    dialogref.afterClosed().subscribe((res) => {
+      if (res) {
+        this.getemployee()
+      }
+    })
   }
- })
-  }
-
-  getemployee(){
+  inoutArray: Array<any> = []
+  getemployee() {
     this._headingservice.heading$.next('Attendance')
-    this._attendanceservice.getattendanceinfo().subscribe((res)=>{
+    this._attendanceservice.getattendanceinfo().subscribe((res) => {
       console.log(res);
-      
-     this.dataSource=new MatTableDataSource(res)
-     this.dataSource.sort=this.sort
-     this.dataSource.paginator=this.paginator
+
+      this.dataSource = new MatTableDataSource(res)
+      this.dataSource.sort = this.sort
+      this.dataSource.paginator = this.paginator
     })
   }
 
@@ -67,34 +69,36 @@ export class AttendanceTableComponent implements OnInit {
     }
   }
 
-  oneditattendanceform(obj:Iattendance){
+  oneditattendanceform(obj: Iattendance) {
     console.log(obj);
-    
+
     let dialogconfig = new MatDialogConfig
     dialogconfig.data = obj
-      this._dialog.open(AttendanceFormComponent, dialogconfig)
-      .afterClosed().subscribe((res)=>{
-        if(!res){
+    this._dialog.open(AttendanceFormComponent, dialogconfig)
+      .afterClosed().subscribe((res) => {
+        console.log(res);
+
+        if (res) {
           this.getemployee()
         }
       })
   }
 
-  ondeleteuser(obj:Iattendance){
-   this._dialog.open(DeleteConfirmationComponent).afterClosed()
-   .subscribe((res)=>{
-    if(res){
-      this._attendanceservice.deleteinfo(obj.id!)
-      .subscribe((res)=>{
-       this.getemployee()
-       this._snackbarService.snackBarOpen( "userdata Deleted Sucessfully!!!")
-       
-      }
-      )
-    }
-   })
+  ondeleteuser(obj: Iattendance) {
+    this._dialog.open(DeleteConfirmationComponent).afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this._attendanceservice.deleteinfo(obj.id!)
+            .subscribe((res) => {
+              this.getemployee()
+              this._snackbarService.snackBarOpen("userdata Deleted Sucessfully!!!")
 
- 
+            }
+            )
+        }
+      })
+
+
   }
 
 }

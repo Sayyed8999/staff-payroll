@@ -70,8 +70,8 @@ export class AdvanceFormComponent implements OnInit {
   }
 
   advanceFormHandler() {
-    if (!this.advanceObj) {
-      if (!this.advanceForm.invalid) {
+    if (!this.advanceForm.invalid) {
+      if (!this.advanceObj) {
         console.log(this.advanceForm.value);
         this._advancePayService.addAdvancePay(this.advanceForm.value)
           .subscribe(res => {
@@ -79,16 +79,16 @@ export class AdvanceFormComponent implements OnInit {
             this._dialogRef.close()
             this._snackbarService.snackBarOpen(`${this.advanceForm.get('empName')?.value}'s Adavance Pay Request is Added`)
           })
-      }
-    } else {
-      console.log(this.advanceObj.id);
+      } else {
+        console.log(this.advanceObj.id);
 
-      this._advancePayService.updateAdvance(this.advanceObj.id!, this.advanceForm.value)
-        .subscribe(res => {
-          console.log(res);
-          this._dialogRef.close()
-          this._snackbarService.snackBarOpen(`${this.advanceForm.get('empName')?.value}'s Adavance Pay Updated `)
-        })
+        this._advancePayService.updateAdvance(this.advanceObj.id!, this.advanceForm.value)
+          .subscribe(res => {
+            console.log(res);
+            this._dialogRef.close()
+            this._snackbarService.snackBarOpen(`${this.advanceForm.get('empName')?.value}'s Adavance Pay Updated `)
+          })
+      }
     }
 
   }
