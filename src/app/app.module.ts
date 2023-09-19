@@ -11,6 +11,8 @@ import { EmployeesModule } from './shared/modules/employees/employees.module';
 import { AdvanceModule } from './shared/modules/advance/advance.module';
 import { AttendanceModule } from './shared/modules/attendance/attendance.module';
 import { LeavesModule } from './shared/modules/leaves/leaves.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthinterceptorService } from './shared/services/authinterceptor.service';
 
 
 
@@ -31,7 +33,13 @@ import { LeavesModule } from './shared/modules/leaves/leaves.module';
     LeavesModule,
 
   ],
-  providers: [],
+  providers: [
+   {
+     provide:HTTP_INTERCEPTORS,
+    useClass:AuthinterceptorService,
+    multi:true
+}
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
