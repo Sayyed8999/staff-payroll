@@ -13,6 +13,8 @@ import { AttendanceModule } from './shared/modules/attendance/attendance.module'
 import { LeavesModule } from './shared/modules/leaves/leaves.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthinterceptorService } from './shared/services/authinterceptor.service';
+import { SaleryRecordTableComponent } from './shared/modules/salery-record/salery-record/salery-record-table/salery-record-table.component';
+import { SaleryRecordModule } from './shared/modules/salery-record/salery-record/salery-record.module';
 
 
 
@@ -20,7 +22,8 @@ import { AuthinterceptorService } from './shared/services/authinterceptor.servic
   declarations: [
     AppComponent,
     DashboardComponent,
-    NavComponent
+    NavComponent,
+    SaleryRecordTableComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +32,9 @@ import { AuthinterceptorService } from './shared/services/authinterceptor.servic
     MaterialModule,
     EmployeesModule,
     AdvanceModule,
-    // AttendanceModule,
+    AttendanceModule,
     LeavesModule,
-
+    SaleryRecordModule
   ],
   providers: [
    {

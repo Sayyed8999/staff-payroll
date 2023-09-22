@@ -6,6 +6,7 @@ import { AttendanceModule } from './shared/modules/attendance/attendance.module'
 import { AttendanceTableComponent } from './shared/modules/attendance/attendace-table/attendance-table/attendance-table.component';
 import { LeaveTableComponent } from './shared/modules/leaves/leave-table/leave-table.component';
 import { AdvanceTableComponent } from './shared/modules/advance/advance-table/advance-table.component';
+import { SaleryRecordTableComponent } from './shared/modules/salery-record/salery-record/salery-record-table/salery-record-table.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'advance',
     component: AdvanceTableComponent
+  },
+  {
+    path : 'saleryrecord',
+    component: SaleryRecordTableComponent
   }
 ];
 

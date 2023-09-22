@@ -22,13 +22,14 @@ export class AuthinterceptorService implements HttpInterceptor {
       }
     })
     return next.handle(authRequest)
-      .pipe(
-        delay(300),
-        finalize(() => {
-          this._loaderservice.loadingStatus.next(false)
-        })
-
-      )
-  }
-
+    .pipe
+    ( 
+      delay(1000),
+    
+    finalize(()=>{
+        this._loaderservice.loadingStatus.next(false)
+    })
+ 
+ ) }
+  
 }
