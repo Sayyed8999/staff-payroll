@@ -69,7 +69,8 @@ export class EmployeTableComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true
     this._dialog.open(EmployeFormComponent, dialogConfig).afterClosed()
       .subscribe(res => {
-        if (!res) {
+
+        if (res) {
           this.getAllEmp()
         }
       })
@@ -83,7 +84,8 @@ export class EmployeTableComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = true
     this._dialog.open(EmployeFormComponent, dialogConfig).afterClosed()
       .subscribe(res => {
-        if (!res) {
+
+        if (res) {
           this.getAllEmp()
         }
       })

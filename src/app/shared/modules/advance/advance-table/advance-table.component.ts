@@ -58,7 +58,7 @@ export class AdvanceTableComponent implements OnInit {
     this._dialog.open(AdvanceFormComponent, dialogConfig).afterClosed()
       .subscribe(res => {
         console.log(res);
-        if (!res) {
+        if (res) {
           this.getALlAdvance()
         }
       })
@@ -93,7 +93,7 @@ export class AdvanceTableComponent implements OnInit {
     dialogConfig.disableClose = true
     this._dialog.open(AdvanceFormComponent, dialogConfig).afterClosed()
       .subscribe(res => {
-        if (!res) {
+        if (res) {
           this.getALlAdvance()
         }
       })

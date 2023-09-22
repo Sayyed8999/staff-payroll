@@ -61,7 +61,7 @@ export class LeaveTableComponent implements OnInit, OnDestroy {
     this._dialog.open(LeaveFormComponent, dialogConfig).afterClosed()
       .subscribe(res => {
         // console.log(res);
-        if (!res) {
+        if (res) {
           this.getAllLeave()
         }
       })
@@ -74,7 +74,7 @@ export class LeaveTableComponent implements OnInit, OnDestroy {
 
     this._dialog.open(LeaveFormComponent, dialogConfig).afterClosed().subscribe(res => {
       // console.log(res);
-      if (!res) {
+      if (res) {
         this.getAllLeave()
       }
     })

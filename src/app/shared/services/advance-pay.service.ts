@@ -42,4 +42,22 @@ export class AdvancePayService {
   deleteAdvance(id: string): Observable<null> {
     return this._http.delete<null>(`${this.advancePayUrl}/${id}/.json`)
   }
+
+  getAllAdvanceAmount(): Observable<any[]> {
+    return this._http.get<any[]>(this.advancePayUrl + '.json')
+      .pipe(
+        map(res => {
+          let arr = []
+
+          for (let key in res) {
+            let obj = {
+              fullName: res[key].empName,
+              advance: res[key].amount
+            }
+            arr.unshift(obj)
+          }
+          return arr
+        })
+      )
+  }
 }

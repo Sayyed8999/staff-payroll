@@ -30,4 +30,8 @@ th {
     h4 {
         font-size: 16px;
     }
+
+    .search>mat-form-field {
+        width: 100% !important;
+    }
 }

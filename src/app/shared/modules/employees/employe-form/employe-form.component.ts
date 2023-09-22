@@ -68,7 +68,7 @@ export class EmployeFormComponent implements OnInit, OnDestroy {
           .subscribe(res => {
             // console.log(res);
             this._snackbarService.snackBarOpen(`${this.employeForm.get('fname')?.value} Employee is Added Successfully...!!!`)
-            this._matDialogRef.close()
+            this._matDialogRef.close(true)
           })
       }
     } else {
@@ -79,7 +79,7 @@ export class EmployeFormComponent implements OnInit, OnDestroy {
             // console.log(res, 'res');
             this._snackbarService.snackBarOpen(`Employee ${this.employeForm.get('fname')?.value} Information Updated...!!!`)
 
-            this._matDialogRef.close()
+            this._matDialogRef.close(true)
           })
       }
 

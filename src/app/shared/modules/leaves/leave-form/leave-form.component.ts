@@ -76,14 +76,14 @@ export class LeaveFormComponent implements OnInit {
         this._leaveService.createLeave(this.leaveForm.value)
           .subscribe(res => {
             // console.log(res);
-            this._dialogRef.close()
+            this._dialogRef.close(true)
             this._snackBarService.snackBarOpen(`${this.leaveForm.get('empName')?.value}'s  leave Added Successfully...!!!`)
           })
       } else {
         this._leaveService.updateLeave(this.leaveForm.value, this.leaveObj.id!)
           .subscribe(res => {
             // console.log(res);
-            this._dialogRef.close()
+            this._dialogRef.close(true)
             this._snackBarService.snackBarOpen(`${this.leaveForm.get('empName')?.value}'s leave Update Successfully...!!!`)
 
           })

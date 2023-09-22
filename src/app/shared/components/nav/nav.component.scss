@@ -88,6 +88,13 @@ mat-nav-list>a:focus {
 
     }
 
+
+    mat-drawer-container {
+        height: calc(100vh - 60px);
+
+    }
+
+
     mat-drawer {
         width: 50%;
     }

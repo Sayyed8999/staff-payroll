@@ -76,7 +76,7 @@ export class AdvanceFormComponent implements OnInit {
         this._advancePayService.addAdvancePay(this.advanceForm.value)
           .subscribe(res => {
             console.log(res);
-            this._dialogRef.close()
+            this._dialogRef.close(true)
             this._snackbarService.snackBarOpen(`${this.advanceForm.get('empName')?.value}'s Adavance Pay Request is Added`)
           })
       } else {
@@ -85,7 +85,7 @@ export class AdvanceFormComponent implements OnInit {
         this._advancePayService.updateAdvance(this.advanceObj.id!, this.advanceForm.value)
           .subscribe(res => {
             console.log(res);
-            this._dialogRef.close()
+            this._dialogRef.close(true)
             this._snackbarService.snackBarOpen(`${this.advanceForm.get('empName')?.value}'s Adavance Pay Updated `)
           })
       }
