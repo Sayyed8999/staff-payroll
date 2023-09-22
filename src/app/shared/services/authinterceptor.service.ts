@@ -23,7 +23,10 @@ export class AuthinterceptorService implements HttpInterceptor {
     })
     return next.handle(authRequest)
     .pipe
-    ( delay(2000),finalize(()=>{
+    ( 
+      delay(1000),
+    
+    finalize(()=>{
         this._loaderservice.loadingStatus.next(false)
     })
  

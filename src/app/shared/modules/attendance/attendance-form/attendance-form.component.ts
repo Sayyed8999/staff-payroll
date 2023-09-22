@@ -113,6 +113,8 @@ export class AttendanceFormComponent implements OnInit {
     this._employeeService.getAllEmployeeNames()
       .subscribe((res) => {
         this.employeename = res
+        console.log(this.employeename);
+        
         this.filteredOptions = this.signupform.controls['EmployeeName'].valueChanges.pipe(
           startWith(''),
           map(value => this._filter(value || '')),
