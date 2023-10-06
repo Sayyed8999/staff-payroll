@@ -14,12 +14,6 @@ import { HeadingService } from 'src/app/shared/services/heading.service';
 })
 export class SaleryRecordTableComponent implements OnInit {
   
-
-
-
-
-
-
   displayedColumns: string[] = ['EmpName', 'presentDays', 'saleryAmount', 'saleryDate','totalAdvance','edit','delete'];
   dataSource!: MatTableDataSource<any>;
 
