@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable, map, startWith } from 'rxjs';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { SaleryRecordService } from 'src/app/shared/services/salery-record.service';
@@ -19,7 +19,7 @@ export class SaleryRecordFormComponent implements OnInit {
   constructor(private _saleryrecordservice:SaleryRecordService,
     private snackbarservice:SnackbarService,
     private dialogref:MatDialogRef<SaleryRecordFormComponent>,
-    private _EmployeeService:EmployeeService) { }
+    private _EmployeeService:EmployeeService, @Inject(MAT_DIALOG_DATA) private data:any) { }
 
   ngOnInit(): void {
     this.submitsaleryform=new FormGroup({
@@ -32,6 +32,7 @@ export class SaleryRecordFormComponent implements OnInit {
 
     this.getemployeename()
     
+    this.submitsaleryform.patchValue(this.data)
   }
 
   

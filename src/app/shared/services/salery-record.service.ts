@@ -32,4 +32,9 @@ export class SaleryRecordService {
       })
     )
    }
+
+
+   deletesalerydetails(id:any):Observable<any>{
+     return this._httpservice.delete<any>(`${environment.fireBaseUrl}/salery/${id}/.json`);
+   }
 }

@@ -1,5 +1,5 @@
 export interface Iattendance {
-    emplname: string,
+    EmployeeName: string,
     date: string,
     inTime: string,
     outTime: string,

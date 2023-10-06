@@ -85,13 +85,15 @@ export class AttendanceTableComponent implements OnInit {
   }
 
   ondeleteuser(obj: Iattendance) {
+    // console.log(obj);
+    
     this._dialog.open(DeleteConfirmationComponent).afterClosed()
       .subscribe((res) => {
         if (res) {
           this._attendanceservice.deleteinfo(obj.id!)
             .subscribe((res) => {
               this.getemployee()
-              this._snackbarService.snackBarOpen("userdata Deleted Sucessfully!!!")
+              this._snackbarService.snackBarOpen(`${obj.EmployeeName} deleted sucessfully`)
 
             }
             )
