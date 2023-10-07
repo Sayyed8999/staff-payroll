@@ -33,8 +33,11 @@ export class SaleryRecordService {
     )
    }
 
+   updateemployee(id:string,data:any):Observable<any>{
+    return this._httpservice.patch<any>(`${environment.fireBaseUrl}salery/${id}/.json`,data)
+   }
 
    deletesalerydetails(id:any):Observable<any>{
-     return this._httpservice.delete<any>(`${environment.fireBaseUrl}/salery/${id}/.json`);
+     return this._httpservice.delete<any>(`${environment.fireBaseUrl}salery/${id}/.json`);
    }
 }

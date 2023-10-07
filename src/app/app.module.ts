@@ -34,7 +34,7 @@ import { SaleryRecordModule } from './shared/modules/salery-record/salery-record
     AdvanceModule,
     AttendanceModule,
     LeavesModule,
-    SaleryRecordModule
+    // SaleryRecordModule
   ],
   providers: [
    {

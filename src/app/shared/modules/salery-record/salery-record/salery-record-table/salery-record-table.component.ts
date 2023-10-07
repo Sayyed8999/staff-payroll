@@ -69,7 +69,12 @@ export class SaleryRecordTableComponent implements OnInit {
   oneditsaleryform(obj:any){
     let dialogconfig = new MatDialogConfig
     dialogconfig.data = obj
-    this._dialog.open(SaleryRecordFormComponent,dialogconfig)
+    this._dialog.open(SaleryRecordFormComponent,dialogconfig).afterClosed()
+    .subscribe(res => {
+      if(res){
+        this.getsalerydetails()
+      }
+    })
   }
 
   ondeletesalerydetails(obj:Isalery){
@@ -83,6 +88,7 @@ export class SaleryRecordTableComponent implements OnInit {
         this._saleryrecord.deletesalerydetails(obj.id)
         .subscribe((res)=>{
          // this.getsalerydetails()
+          this.getsalerydetails()
            this._snackbar.snackBarOpen(`${obj.EmpName} Deleted sucessfully!!!`)
         })
       }

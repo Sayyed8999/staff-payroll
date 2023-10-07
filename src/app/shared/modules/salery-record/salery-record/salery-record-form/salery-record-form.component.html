@@ -61,7 +61,7 @@
     </mat-dialog-content>
 
     <mat-dialog-actions align=end>
-        <button mat-raised-button color="primary" type="submit" (click)="onformsubmit()"> Save </button>
+        <button mat-raised-button color="primary" type="submit" (click)="onformsubmit()"> {{ data ? 'update' : 'save'}} </button>
         <button mat-raised-button  type="button" (click)="submitsaleryform.reset()"> Reset </button>
   </mat-dialog-actions>
  

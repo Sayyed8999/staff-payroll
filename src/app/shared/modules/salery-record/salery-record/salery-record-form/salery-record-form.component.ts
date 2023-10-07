@@ -19,7 +19,7 @@ export class SaleryRecordFormComponent implements OnInit {
   constructor(private _saleryrecordservice:SaleryRecordService,
     private snackbarservice:SnackbarService,
     private dialogref:MatDialogRef<SaleryRecordFormComponent>,
-    private _EmployeeService:EmployeeService, @Inject(MAT_DIALOG_DATA) private data:any) { }
+    private _EmployeeService:EmployeeService, @Inject(MAT_DIALOG_DATA) public data:any) { }
 
   ngOnInit(): void {
     this.submitsaleryform=new FormGroup({
@@ -32,7 +32,12 @@ export class SaleryRecordFormComponent implements OnInit {
 
     this.getemployeename()
     
-    this.submitsaleryform.patchValue(this.data)
+    if(this.data){
+      this.submitsaleryform.patchValue(this.data)
+      // console.log(this.data);
+    }
+   
+
   }
 
   
@@ -41,17 +46,31 @@ export class SaleryRecordFormComponent implements OnInit {
 
   saleryformsubmit(){
    if(this.submitsaleryform.valid){
-    //  console.log(this.submitsaleryform.value);
-       this._saleryrecordservice.addsaleryDetails(this.submitsaleryform.value)
-       .subscribe((res)=>{
+     if(this.data){
+      
+      this._saleryrecordservice.updateemployee(this.data.id,this.submitsaleryform.value)
+      .subscribe((res)=>{
 
-        console.log(res);
-        
-           this.snackbarservice.snackBarOpen("salery record Details added sucessfully")
-           this.dialogref.close(true)
-          
-       },
-      )
+       console.log(res, 'updated');
+       
+          this.snackbarservice.snackBarOpen("salery record Details Updted  sucessfully")
+          this.dialogref.close(true)
+         
+      },
+     )
+     }else{
+      this._saleryrecordservice.addsaleryDetails(this.submitsaleryform.value)
+      .subscribe((res)=>{
+
+       console.log(res);
+       
+          this.snackbarservice.snackBarOpen("salery record Details added sucessfully")
+          this.dialogref.close(true)
+         
+      },
+     )
+     }
+     
    }
   }
 
