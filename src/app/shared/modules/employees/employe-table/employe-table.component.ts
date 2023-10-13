@@ -87,6 +87,8 @@ export class EmployeTableComponent implements OnInit, OnDestroy {
 
         if (res) {
           this.getAllEmp()
+
+
         }
       })
   }
@@ -109,6 +111,11 @@ export class EmployeTableComponent implements OnInit, OnDestroy {
             .subscribe(res => {
               console.log(res);
               this.getAllEmp()
+
+              this._employeeService.getAllEmployeeNames().subscribe(res => {
+                // console.log(res);
+                localStorage.setItem('employName', JSON.stringify(res))
+              })
               this._snackbarService.snackBarOpen(`${obj.fname} ${obj.lname} Employee is Removed...!!!`)
             })
         }

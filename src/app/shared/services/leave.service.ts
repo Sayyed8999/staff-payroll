@@ -11,7 +11,7 @@ import { UtilityService } from './utility.service';
 export class LeaveService {
 
   leaveUrl = environment.fireBaseUrl + 'leaves'
-  
+
   constructor(
     private _http: HttpClient,
     private _utilityService: UtilityService

@@ -1,4 +1,4 @@
-import {  ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HeadingService } from '../../services/heading.service';
 import { LoaderService } from '../../services/loader.service';
@@ -10,14 +10,14 @@ import { LoaderService } from '../../services/loader.service';
 })
 export class NavComponent implements OnInit, OnDestroy {
 
-  isLoading: boolean= false
+  isLoading: boolean = false
 
   heading!: string
   constructor(
     private _headingService: HeadingService,
-    private _loaderService:LoaderService
-  ) { 
-    this._loaderService.loadingStatus.subscribe((res)=>{
+    private _loaderService: LoaderService
+  ) {
+    this._loaderService.loadingStatus.subscribe((res) => {
       this.isLoading = res
     })
   }
@@ -25,7 +25,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-   
+
     this._headingService.heading$
       .subscribe(res => {
         this.heading = res
@@ -34,7 +34,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._headingService.heading$.unsubscribe()
-    
+
   }
 
 

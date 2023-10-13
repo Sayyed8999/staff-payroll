@@ -52,12 +52,16 @@ export class EmployeeService {
           let arr = []
           for (let key in res) {
             // console.log(key);
-            arr.push(res[key].fname + ' ' + res[key].lname)
+            arr.unshift(res[key].fname + ' ' + res[key].lname)
           }
           // console.log(arr);
           return arr
         }
         )
       )
+  }
+
+  getAllEmployeeNamesFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('employName')!)
   }
 }

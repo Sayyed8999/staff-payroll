@@ -15,79 +15,77 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 export class SaleryRecordFormComponent implements OnInit {
   filteredOptions!: Observable<string[]>;
   employeename: Array<any> = []
-  submitsaleryform!:FormGroup
-  constructor(private _saleryrecordservice:SaleryRecordService,
-    private snackbarservice:SnackbarService,
-    private dialogref:MatDialogRef<SaleryRecordFormComponent>,
-    private _EmployeeService:EmployeeService, @Inject(MAT_DIALOG_DATA) public data:any) { }
+  submitsaleryform!: FormGroup
+  constructor(private _saleryrecordservice: SaleryRecordService,
+    private snackbarservice: SnackbarService,
+    private dialogref: MatDialogRef<SaleryRecordFormComponent>,
+    private _EmployeeService: EmployeeService, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    this.submitsaleryform=new FormGroup({
-      EmpName : new FormControl(null,[Validators.required]),
-      saleryDate: new FormControl(null,[Validators.required]),
-      totalAdvance : new FormControl(null,[Validators.required]),
-      presentDays : new FormControl(null,[Validators.required]),
-      saleryAmount: new FormControl(null,[Validators.required])
+
+    this.employeename = this._EmployeeService.getAllEmployeeNamesFromLocalStorage()
+
+    this.submitsaleryform = new FormGroup({
+      EmpName: new FormControl(null, [Validators.required]),
+      saleryDate: new FormControl(null, [Validators.required]),
+      totalAdvance: new FormControl(null, [Validators.required]),
+      presentDays: new FormControl(null, [Validators.required]),
+      saleryAmount: new FormControl(null, [Validators.required])
     })
 
-    this.getemployeename()
-    
-    if(this.data){
+    // this.getemployeename()
+
+    if (this.data) {
       this.submitsaleryform.patchValue(this.data)
       // console.log(this.data);
     }
-   
 
-  }
-
-  
-
-  
-
-  saleryformsubmit(){
-   if(this.submitsaleryform.valid){
-     if(this.data){
-      
-      this._saleryrecordservice.updateemployee(this.data.id,this.submitsaleryform.value)
-      .subscribe((res)=>{
-
-       console.log(res, 'updated');
-       
-          this.snackbarservice.snackBarOpen("salery record Details Updted  sucessfully")
-          this.dialogref.close(true)
-         
-      },
-     )
-     }else{
-      this._saleryrecordservice.addsaleryDetails(this.submitsaleryform.value)
-      .subscribe((res)=>{
-
-       console.log(res);
-       
-          this.snackbarservice.snackBarOpen("salery record Details added sucessfully")
-          this.dialogref.close(true)
-         
-      },
-     )
-     }
-     
-   }
-  }
-
-  onformsubmit(){
-     
-  }
-
-  getemployeename(){
-   this._EmployeeService.getAllEmployeeNames()
-   .subscribe((res)=>{
-    this.employeename=res
     this.filteredOptions = this.submitsaleryform.controls['EmpName'].valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
-   })
+
   }
+
+
+
+
+
+  saleryformsubmit() {
+    if (this.submitsaleryform.valid) {
+      if (this.data) {
+
+        this._saleryrecordservice.updateemployee(this.data.id, this.submitsaleryform.value)
+          .subscribe((res) => {
+
+            console.log(res, 'updated');
+
+            this.snackbarservice.snackBarOpen("salery record Details Updted  sucessfully")
+            this.dialogref.close(true)
+
+          },
+          )
+      } else {
+        this._saleryrecordservice.addsaleryDetails(this.submitsaleryform.value)
+          .subscribe((res) => {
+
+            console.log(res);
+
+            this.snackbarservice.snackBarOpen("salery record Details added sucessfully")
+            this.dialogref.close(true)
+
+          },
+          )
+      }
+
+    }
+  }
+
+  onformsubmit() {
+
+  }
+
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 

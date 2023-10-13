@@ -29,13 +29,19 @@ export class AdvanceFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createAdvanceForm()
-    this.getEmpName()
+    this.employeeNameArray = this._employeeService.getAllEmployeeNamesFromLocalStorage()
     this.todaysDate = new Date()
 
     if (this.Obj) {
       this.advanceObj = this.Obj
       this.advanceForm.patchValue(this.Obj)
     }
+
+    // autocomplete
+    this.filteredOptions = this.advanceForm.controls['empName'].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    )
   }
 
   createAdvanceForm(): FormGroup {
@@ -48,20 +54,7 @@ export class AdvanceFormComponent implements OnInit {
     })
   }
 
-  getEmpName() {
-    return this._employeeService.getAllEmployeeNames()
-      .subscribe(res => {
-        this.employeeNameArray = res
-        // console.log(this.employeeNameArray);
 
-        // autocomplete
-        this.filteredOptions = this.advanceForm.controls['empName'].valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value || '')),
-        )
-      })
-
-  }
 
   // autocomplete
   private _filter(value: string): string[] {

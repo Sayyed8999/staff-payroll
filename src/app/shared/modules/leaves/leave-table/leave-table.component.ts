@@ -66,6 +66,8 @@ export class LeaveTableComponent implements OnInit, OnDestroy {
         }
       })
   }
+
+
   onEditLeave(obj: Ileave) {
     let dialogConfig = new MatDialogConfig
     dialogConfig.data = obj
@@ -79,6 +81,8 @@ export class LeaveTableComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

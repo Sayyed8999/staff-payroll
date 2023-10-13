@@ -31,7 +31,7 @@ export class AttendanceFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.employeename = this._employeeService.getAllEmployeeNamesFromLocalStorage()
 
     this.signupform = new FormGroup({
       EmployeeName: new FormControl(null, [Validators.required]),
@@ -77,7 +77,12 @@ export class AttendanceFormComponent implements OnInit {
       }
 
     })
-    this.getemployeeName()
+
+    //auto complete
+    this.filteredOptions = this.signupform.controls['EmployeeName'].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
 
     if (this.obj) {
       console.log(this.obj);
@@ -109,19 +114,6 @@ export class AttendanceFormComponent implements OnInit {
 
   }
 
-  getemployeeName() {
-    this._employeeService.getAllEmployeeNames()
-      .subscribe((res) => {
-        this.employeename = res
-        console.log(this.employeename);
-        
-        this.filteredOptions = this.signupform.controls['EmployeeName'].valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value || '')),
-        );
-      })
-
-  }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

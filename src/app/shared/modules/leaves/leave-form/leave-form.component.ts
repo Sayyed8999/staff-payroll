@@ -30,12 +30,19 @@ export class LeaveFormComponent implements OnInit {
   ngOnInit(): void {
     this.createLeaveForm()
     this.todaysDate = new Date()
-    this.getEmpName()
+    this.employeeNameArray = this._employeeService.getAllEmployeeNamesFromLocalStorage()
 
     if (this.obj) {
       this.leaveObj = this.obj
       this.leaveForm.patchValue(this.leaveObj)
+
     }
+    // autocomplete
+    this.filteredOptions = this.leaveForm.controls['empName'].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    )
+
 
   }
   // autocomplete
@@ -44,20 +51,6 @@ export class LeaveFormComponent implements OnInit {
     return this.employeeNameArray.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  getEmpName() {
-    return this._employeeService.getAllEmployeeNames()
-      .subscribe(res => {
-        this.employeeNameArray = res
-        // console.log(this.employeeNameArray);
-
-        // autocomplete
-        this.filteredOptions = this.leaveForm.controls['empName'].valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value || '')),
-        )
-      })
-
-  }
 
   createLeaveForm(): FormGroup {
     return this.leaveForm = this._fb.group({
